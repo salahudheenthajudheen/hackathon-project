@@ -1,0 +1,24 @@
+<body class="bg-dark">
+    <div class="container mt-3" id="app">
+      <div class="d-flex d-flex justify-content-between">
+        <button :disabled="currentQuestionIndex == 0" @click="currentQuestionIndex--" class="btn btn-success">Previous</button>
+        <span class="text-white">
+          {{ currentQuestionIndex + 1 }}. of {{ questions.length }}
+        </span>
+        <button :disabled="currentQuestionIndex == questions.length -1" @click="currentQuestionIndex++" class="btn btn-success">Next</button>
+      </div>
+      <p class="text-white text-center fw-bold my-4">{{ questions[currentQuestionIndex].question }}</p>
+      <div class="list-group" v-for="(answer, index) in questions[currentQuestionIndex].answers">
+        <button type="button" class="list-group-item mb-2" :class="{
+                  'list-group-item-danger': answers[currentQuestionIndex] == index && questions[currentQuestionIndex].correctChoise != answers[currentQuestionIndex],
+                  'list-group-item-success': answers[currentQuestionIndex] == index && questions[currentQuestionIndex].correctChoise == answers[currentQuestionIndex],
+                  }" @click="answers[currentQuestionIndex] = index">{{ answer }}</button>
+      </div>
+      <p class="text-white text-center fw-bold">Result: {{ correctAnswers }}/{{ questions.length }}</p>
+    </div>
+  
+    <div class="container text-center text-muted">
+      <small>Pentagon©.</small>
+    </div>
+  
+  </body>
